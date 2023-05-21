@@ -2,7 +2,7 @@
 #include <QApplication>
 #include "GameMap.h"
 
-GameMap globalGameMap(36, 64);
+GameMap globalGameMap(65, 37);
 
 
 int main(int argc, char *argv[])

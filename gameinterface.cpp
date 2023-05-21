@@ -189,10 +189,15 @@ void player::Update()
     printf("%d %d\n",x,y);
     if (!globalGameMap.isCollision(NewX, NewY)) {
             // 如果没有碰撞，更新位置
+        cout<<"x:  "<<NewX/30<<" y:  "<<NewY/30<<endl;
             x = NewX;
             y = NewY;
         }
-    if(globalGameMap.mapData[x/30][y/30]==2)globalGameMap.mapData[x/30][y/30]=0;
+    int tempX[4]={6,0,-6,0};
+    int tempY[4]={0,6,0,-6};
+    for(int k=0;k<4;k++)
+        if (globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30] == 2)
+            globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]=0;
     player_rect.moveTo(x,y);
 }
 

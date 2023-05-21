@@ -3,10 +3,13 @@
 
 #include "player.h"
 
+#include<iostream>
 #include <QTimer>
 #include <QKeyEvent>
 #include <QPainter>
 #include <QMainWindow>
+
+using namespace std;
 
 class GameInterface : public QMainWindow
 {

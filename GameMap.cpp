@@ -19,15 +19,15 @@ void GameMap::drawMap(QPainter &painter) {
                     // 不绘制任何内容
                     break;
                 case 1: // 墙壁
-                painter.setPen(QPen(Qt::white,20));//设置画笔形式
+                painter.setPen(QPen(Qt::white,30));//设置画笔形式
                 painter.setBrush(white_brush);                //应用刷子
-                painter.drawPoint(j*30,i*30);
+                painter.drawPoint(i*30+30,j*30+30);
                     // 绘制墙壁
                     break;
                 case 2: // 豆子
                 painter.setPen(QPen(Qt::green,13));
                 painter.setBrush(green_brush);
-                BeanRect.moveTo(30*i,30*j);
+                BeanRect.moveTo(30*i+15,30*j+15);
                 painter.drawPie(BeanRect,0,360*16);
                     // 绘制豆子
                     break;
@@ -38,18 +38,14 @@ void GameMap::drawMap(QPainter &painter) {
 
 
 bool GameMap::isCollision(int x, int y) {
-    int gridX = x ; // 计算在地图数组中的坐标
-    int gridY = y ;
-
-    // 如果数组越界，返回true，表示发生碰撞
-    if (gridX < 0 || gridX >= 2400 || gridY < 0 || gridY >= 1440) {
-        return true;
-    }
 
     // 如果地图元素是墙壁，则返回true，表示发生碰撞
-    if (mapData[(gridY+40)/30][(gridX+40)/30] == 1) {
+    int tempX[4]={16,0,-16,0};
+    int tempY[4]={0,16,0,-16};
+    for(int k=0;k<4;k++){
+        if (mapData[(x+tempX[k])/30][(y+tempY[k])/30] == 1) {
         return true;
-    }
+    }}
 
     // 否则返回false，表示没有碰撞
     return false;
