@@ -1,5 +1,61 @@
 #include"GameMap.h"
-#include<iostream>
+
+
+bool GameMap::isRoad(int x,int y){
+    int countWalls=0;
+    for(int i=0;i<4;i++){
+        if(mapData[x + dx[i]][y + dy[i]] == 1)countWalls++;
+    }
+    if(countWalls>=3)return 1;
+    else return 0;
+}
+/**
+ * @brief GameMap class constructor.
+ *
+ * Initializes the game map with a given width and height, and sets up the map data.
+ *
+ * @param width Width of the game map.
+ * @param height Height of the game map.
+ */
+GameMap::GameMap(int width, int height) : width(width), height(height), mapData(width, QVector<int>(height)), Visited(width, QVector<bool>(height)) {
+    int i, j;
+    for(i = 0; i < width; i++)for(j = 0; j < height; j++)mapData[i][j] = 1;
+
+    generatePerfectMaze(3,3);
+    for(i = 0; i < width; i++){
+        j = 0;
+        mapData[i][j] = 1;
+        j = height-1;
+        mapData[i][j] = 1;
+    }
+    for(i = 0; i < height; i++){
+        j = 0;
+        mapData[j][i] = 1;
+        j = width-1;
+        mapData[j][i] = 1;
+    }
+
+    for(i=0;i<width;i++)for(j=0;j<height;j++)if(mapData[i][j]==0){if(i%4==0&&j%4==0)mapData[i][j]=2;}
+    BeanRect.setWidth(8);
+    BeanRect.setHeight(8);
+}
+void GameMap::generatePerfectMaze(int x, int y){
+        for(int k=0;k<10;k++)for(int g=0; g<10;g++)cout<<Visited[k][g]<<" ";
+        int h;
+
+        Visited[x][y] = true;
+        vector<int> dirs = {0, 1, 2, 3};
+        random_shuffle(dirs.begin(), dirs.end(), MyRand());
+        for (int dir : dirs) {
+            int nextX = x + dx[dir];
+            int nextY = y + dy[dir];
+            if (nextX > 0 && nextY > 0 && nextX < width-1 && nextY < height-1 && !Visited[nextX][nextY]&&isRoad(nextX,nextY)) {
+                mapData[x + dx[dir]][y + dy[dir]] = 0; // break the wall
+                generatePerfectMaze(nextX, nextY);
+            }
+        }
+    }
+GameMap::~GameMap(){}
 
 void GameMap::drawMap(QPainter &painter) {
 
