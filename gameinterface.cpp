@@ -9,6 +9,10 @@
 
 extern GameMap globalGameMap;
 
+/**
+ * @brief GameInterface类的构造函数
+ * @param parent 父窗口指针
+ */
 GameInterface::GameInterface(QWidget *parent) :
     QMainWindow(parent)
 {
@@ -18,28 +22,33 @@ GameInterface::GameInterface(QWidget *parent) :
     StartToPlay();
 }
 
+/**
+ * @brief GameInterface类的析构函数
+ */
 GameInterface::~GameInterface()
 {
     delete this;
 }
 
+/**
+ * @brief 初始化游戏场景
+ */
 void GameInterface::initScene()
 {
     //设置窗口的固定大小
     setFixedSize(Game_width, Game_height);
     //设置窗口标题
     setWindowTitle(Game_title);
-    //设置图标
-    //    setWindowIcon(QIcon(img_path));
     //窗体背景色
     setPalette(QPalette(Qt::black));
     setAutoFillBackground(true);
-    //绘制函数(名称固定，不可修改)
-    void paintEvent(QPaintEvent *);
     //配置计时器的刷新间隔
     m_Timer.setInterval(Game_rate);
 }
 
+/**
+ * @brief 开始游戏
+ */
 void GameInterface::StartToPlay()
 {
     //定时器启动
@@ -54,7 +63,11 @@ void GameInterface::StartToPlay()
     });
 
 }
-//键盘操作
+
+/**
+ * @brief 键盘按下事件处理函数
+ * @param ev 键盘事件对象
+ */
 void GameInterface::keyPressEvent(QKeyEvent *ev)
 {
     if(Game_step != 0)
@@ -93,6 +106,11 @@ void GameInterface::keyPressEvent(QKeyEvent *ev)
         this->close();
 
 }
+
+/**
+ * @brief 键盘释放事件处理函数
+ * @param ev 键盘事件对象
+ */
 void GameInterface::keyReleaseEvent(QKeyEvent *ev)
 {
     //释放储存的按键（UD,LR中的值），可以及时“刹车”
@@ -101,18 +119,26 @@ void GameInterface::keyReleaseEvent(QKeyEvent *ev)
     if(ev->key() == Qt::Key_A || ev->key() == Qt::Key_D)
         Pacman.LR = 0;
 }
+
+/**
+ * @brief 更新游戏中的各种数据
+ */
 void GameInterface::UpdateDetails()
 {
     Pacman.Update();    //玩家数据更新
 }
 
-void GameInterface::paintEvent(QPaintEvent *)
+/**
+ * @brief 绘制游戏界面
+ * @param event 绘制事件对象
+ */
+void GameInterface::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
+
     //绘制
     if(Pacman.life>0)
     {
-//        GameMap.MapCreate(GameMap.SpotMatrix);
         globalGameMap.drawMap(painter);
     }
 
@@ -164,8 +190,9 @@ void GameInterface::paintEvent(QPaintEvent *)
     }
 }
 
-
-
+/**
+ * @brief Player类的构造函数
+ */
 player::player()
 {
     //出生坐标
@@ -182,22 +209,25 @@ player::player()
     player_rect.moveTo(x,y);
 }
 
+/**
+ * @brief 更新玩家数据
+ */
 void player::Update()
 {
     int NewY=y+speed*UD;  //上下
     int NewX=x+speed*LR;  //左右
-    printf("%d %d\n",x,y);
     if (!globalGameMap.isCollision(NewX, NewY)) {
-            // 如果没有碰撞，更新位置
-        cout<<"x:  "<<NewX/30<<" y:  "<<NewY/30<<endl;
-            x = NewX;
-            y = NewY;
-        }
-    int tempX[4]={6,0,-6,0};
-    int tempY[4]={0,6,0,-6};
+        // 如果没有碰撞，更新位置
+        x = NewX;
+        y = NewY;
+    }
+    int tempX[4]={2,0,-2,0};
+    int tempY[4]={0,2,0,-2};
+    //吃掉豆子的判定
     for(int k=0;k<4;k++)
-        if (globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30] == 2)
+    {
+        if (globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]==2)
             globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]=0;
+    }
     player_rect.moveTo(x,y);
 }
-
