@@ -1,5 +1,5 @@
-#include"GameMap.h"
-
+﻿#include"GameMap.h"
+#include"config.h"
 /**
  * @brief 判断给定坐标是否为通路
  * @param x x坐标
@@ -60,9 +60,18 @@ GameMap::GameMap(int width, int height) : width(width), height(height), mapData(
             }
         }
     }
-
-    BeanRect.setWidth(8);
-    BeanRect.setHeight(8);
+    for(int i = EnStart_x; i<= EnStart_x + EnStart_w; i++)
+        for(int j=EnStart_y; j<= EnStart_y + EnStart_h; j++)
+        {
+            mapData[i][j] = 0;
+        }
+    for(int i = PacStart_x; i<= PacStart_x + PacStart_w; i++)
+        for(int j=PacStart_y; j<= PacStart_y + PacStart_h; j++)
+        {
+            mapData[i][j] = 0;
+        }
+    BeanRect.setWidth(beans_width);
+    BeanRect.setHeight(beans_height);
 }
 
 /**
@@ -108,6 +117,7 @@ void GameMap::breakWalls() {
             }
         }
     }
+
 }
 
 /**
@@ -115,7 +125,8 @@ void GameMap::breakWalls() {
  * @param painter QPainter对象，用于绘制
  */
 void GameMap::drawMap(QPainter &painter) {
-    QBrush blue_brush(QColor("blue")); // 把刷子设置为白色
+    QBrush blue_brush(QColor("blue")); // 把刷子设置为蓝色
+    blue_brush.setStyle(Qt::SolidPattern);
     QBrush green_brush(QColor("green"));
 
     for (int j = 0; j < height; ++j) {
@@ -126,15 +137,15 @@ void GameMap::drawMap(QPainter &painter) {
                     // 不绘制任何内容
                     break;
                 case 1: // 墙壁
-                    painter.setPen(QPen(Qt::blue, 30)); // 设置画笔形式
+                    painter.setPen(QPen(Qt::blue)); // 设置画笔形式
                     painter.setBrush(blue_brush);       // 应用刷子
-                    painter.drawPoint(i * 30 + 30, j * 30 + 30);
+                    painter.drawRect(i * 30, j*30, 30, 30);
                     // 绘制墙壁
                     break;
                 case 2: // 豆子
-                    painter.setPen(QPen(Qt::green, 13));
+                    painter.setPen(QPen(Qt::green, beans_height));
                     painter.setBrush(green_brush);
-                    BeanRect.moveTo(30 * i + 30, 30 * j + 30);
+                    BeanRect.moveTo(30 * i + 15, 30 * j + 15);
                     painter.drawPie(BeanRect, 0, 360 * 16);
                     // 绘制豆子
                     break;
@@ -150,8 +161,8 @@ void GameMap::drawMap(QPainter &painter) {
  * @return 是否碰撞墙壁
  */
 bool GameMap::isCollision(int x, int y) {
-    int tempX[4] = {10, 0, -10, 0};
-    int tempY[4] = {0, 10, 0, -10};
+    int tempX[4] = {player_width, 0, 0, 0};
+    int tempY[4] = {0, player_height, 0, 0};
     for (int k = 0; k < 4; k++) {
         if (mapData[(x + tempX[k]) / 30][(y + tempY[k]) / 30] == 1) {
             return true;

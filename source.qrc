@@ -1,1 +1,14 @@
-<RCC/>
+<RCC>
+    <qresource prefix="/">
+        <file>material/blue_down1.png</file>
+        <file>material/blue_down2.png</file>
+        <file>material/blue_left1.png</file>
+        <file>material/blue_left2.png</file>
+        <file>material/blue_right1.png</file>
+        <file>material/blue_right2.png</file>
+        <file>material/blue_up1.png</file>
+        <file>material/blue_up2.png</file>
+        <file>material/Pacman.ico</file>
+        <file>material/backmusic.wav</file>
+    </qresource>
+</RCC>

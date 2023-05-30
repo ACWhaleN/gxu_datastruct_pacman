@@ -1,12 +1,13 @@
-#include "gameinterface.h"
+﻿#include "gameinterface.h"
 #include "config.h"
 #include "player.h"
 #include "GameMap.h"
-
+#include "ghost.h"
+#include "startinterface.h"
 #include <QTimer>
-
+#include <QPainter>
 #include <QKeyEvent>
-
+#include <QRect>
 extern GameMap globalGameMap;
 
 /**
@@ -39,9 +40,50 @@ void GameInterface::initScene()
     setFixedSize(Game_width, Game_height);
     //设置窗口标题
     setWindowTitle(Game_title);
+    //设置图标
+    setWindowIcon(QIcon(img_path));
     //窗体背景色
     setPalette(QPalette(Qt::black));
     setAutoFillBackground(true);
+    //设置背景音乐
+    backmusic = new QSound(BackMusic,this);
+    //设置退出按钮
+    End_button->setParent(this);
+    End_button->setFlat(true);
+    End_button->setStyleSheet(
+        "QPushButton{"                          // 正常状态样式
+        "background-color: transparent;"        // 背景设为透明
+        "color: white;"                         // 字体颜色
+        "font: bold 45px;"                      // 字体: 加粗 大小
+        "border:4px solid gray;"
+        "border-radius:10px;"
+        "}"
+        "QPushButton:hover{border:4px solid white}");
+    End_button->setFixedSize(350,60);
+    End_button->setGeometry((Game_width-350)/2,Game_height/3*2,350,60);
+    End_button->adjustSize();
+    //将切换页面的槽函数点击事件进行连接
+    QObject::connect(End_button,SIGNAL(clicked()),this,SLOT(GameOver()));
+    //隐藏退出按钮
+    End_button->hide();
+
+    //设置分数结算显示
+    ScoreText->setParent(this);
+    ScoreText->setGeometry(Game_width/2+200,Game_height/3,350,60);
+    ScoreText->setEnabled(false);
+    ScoreText->setStyleSheet(
+        "QLineEdit{"                          // 正常状态样式
+        "background-color: transparent;"        // 背景设为透明
+        "color: white;"                         // 字体颜色
+        "font: bold 45px;"                      // 字体: 加粗 大小
+        "border:0px;"                       // 无边框
+        "}");
+    ScoreText->hide();
+    //敌人初始化
+    for(int i=0;i<1;i++)
+        enemy[i].Set(i);
+    //绘制函数(名称固定，不可修改)
+    void paintEvent(QPaintEvent *);
     //配置计时器的刷新间隔
     m_Timer.setInterval(Game_rate);
 }
@@ -53,7 +95,6 @@ void GameInterface::StartToPlay()
 {
     //定时器启动
     m_Timer.start();
-
     //监听对象坐标并绘制
     connect(&m_Timer,&QTimer::timeout,[=](){
         //更新各种参数
@@ -70,7 +111,7 @@ void GameInterface::StartToPlay()
  */
 void GameInterface::keyPressEvent(QKeyEvent *ev)
 {
-    if(Game_step != 0)
+    if(Game_step == 1)
     {
         //左右移动键盘读取
         if(ev->key() == Qt::Key_W)
@@ -103,8 +144,7 @@ void GameInterface::keyPressEvent(QKeyEvent *ev)
         this->close();
     //按ESC结束游戏
     if(ev->key() == Qt::Key_Escape)
-        this->close();
-
+        GameOver();
 }
 
 /**
@@ -125,7 +165,23 @@ void GameInterface::keyReleaseEvent(QKeyEvent *ev)
  */
 void GameInterface::UpdateDetails()
 {
-    Pacman.Update();    //玩家数据更新
+    if(Game_step == 1)
+    {
+        Pacman.Update();    //玩家数据更新
+        enemy[0].Update(Pacman.x,Pacman.y);  //敌人数据更新
+        if(enemy[0].Mrect.intersects(Pacman.player_rect))
+            Pacman.life--;
+    }
+    if(Game_step == 2)
+    {
+        score = globalGameMap.BeanScore;
+        ScoreText->setText(QString::number(score));
+        ScoreText->show();
+        End_button->show();
+        backmusic->stop();
+        m_Timer.stop();
+
+    }
 }
 
 /**
@@ -135,20 +191,34 @@ void GameInterface::UpdateDetails()
 void GameInterface::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-
+    QBrush yellow_brush( QColor("yellow") );       //把刷子设置为黄色
+    painter.setBrush(yellow_brush);                //应用刷子
     //绘制
-    if(Pacman.life>0)
+    globalGameMap.drawMap(painter);
+    //开局倒计时的绘制
+    if(Game_step == 0)
     {
-        globalGameMap.drawMap(painter);
+        QFont font1("隶书",40,QFont::Bold);
+        painter.setFont(font1);
+        painter.setPen(Qt::white);
+        //显示倒计时
+        if(StartTime <= 1000/Game_rate)
+            painter.drawText(Game_width/2-100,Game_height/2-50,"Ready!");
+        else
+        {
+            Game_step++;
+            //播放音乐
+            backmusic->play();
+        }
+        StartTime++;
     }
-
-    if(Pacman.life>0)
+    else if(Game_step == 1)
     {
-        painter.setPen(QPen(Qt::yellow,2));//设置画笔形式
         QBrush yellow_brush( QColor("yellow") );       //把刷子设置为黄色
         painter.setBrush(yellow_brush);                //应用刷子
         if(Pacman.flag == 0)
         {
+
             switch (Pacman.state)
             {
             case 1:painter.drawPie(Pacman.player_rect,135*16,270*16);break; //朝上
@@ -157,7 +227,7 @@ void GameInterface::paintEvent(QPaintEvent *event)
             case 4:painter.drawPie(Pacman.player_rect,45*16,270*16);break;  //朝右
             default:painter.drawPie(Pacman.player_rect,0,360*16);
             }
-            if(Pacman.UD|Pacman.LR && Pacman.step>250/Game_rate) //在行动过程中才会发生切换
+            if(Pacman.UD|Pacman.LR && Pacman.step>100/Game_rate) //在行动过程中才会发生切换
             {
                 Pacman.flag = 1;
                 Pacman.step = 0;
@@ -174,60 +244,24 @@ void GameInterface::paintEvent(QPaintEvent *event)
             }
             Pacman.step++;
         }
-    }
-    //开局倒计时的绘制
-    if(Game_step == 0)
-    {
-        QFont font1("隶书",40,QFont::Bold);
-        painter.setFont(font1);
-        painter.setPen(Qt::white);
-        //显示倒计时
-        if(StartTime <= 1000/Game_rate)
-            painter.drawText(Game_width/3,Game_height/2,"Ready！");
-        else
+        for (int i=0; i<1; i++)
+            painter.drawPixmap(enemy[i].x,enemy[i].y,enemy[i].ApCe[enemy[i].carry][enemy[i].flag]);
+        if(Pacman.life<=0)
             Game_step++;
-        StartTime++;
     }
-}
-
-/**
- * @brief Player类的构造函数
- */
-player::player()
-{
-    //出生坐标
-    x = (Game_width - player_width)/2;
-    y = (Game_height - player_height)/2;
-    UD=LR = 0;  //初始为静止状态
-    speed = player_speed;      //速度设定
-    life = initial_life;     //血量设定
-    flag = step = 0;
-    state = 0;
-    //受击体积设定
-    player_rect.setWidth(player_width);
-    player_rect.setHeight(player_height);
-    player_rect.moveTo(x,y);
-}
-
-/**
- * @brief 更新玩家数据
- */
-void player::Update()
-{
-    int NewY=y+speed*UD;  //上下
-    int NewX=x+speed*LR;  //左右
-    if (!globalGameMap.isCollision(NewX, NewY)) {
-        // 如果没有碰撞，更新位置
-        x = NewX;
-        y = NewY;
-    }
-    int tempX[4]={2,0,-2,0};
-    int tempY[4]={0,2,0,-2};
-    //吃掉豆子的判定
-    for(int k=0;k<4;k++)
+    else if(Game_step == 2)
     {
-        if (globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]==2)
-            globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]=0;
+        QFont font2("微软雅黑",45,QFont::Bold);
+        painter.setFont(font2);
+        painter.setPen(Qt::white);
+        painter.drawText((Game_width)/2-200,Game_height/3+50,"Your Score:");
     }
-    player_rect.moveTo(x,y);
+}
+
+
+void GameInterface::GameOver()
+{
+    StartInterface *StartScene = new StartInterface;
+    StartScene->show();
+    this->close();
 }

@@ -1,16 +1,19 @@
-#ifndef GAMEINTERFACE_H
+﻿#ifndef GAMEINTERFACE_H
 #define GAMEINTERFACE_H
 
 #include "player.h"
-
-#include<iostream>
+#include "ghost.h"
+#include <iostream>
 #include <QTimer>
 #include <QKeyEvent>
 #include <QPainter>
 #include <QMainWindow>
-
+#include <QPushButton>
+#include <QLineEdit>
+#include <QSound>
 using namespace std;
-
+//避免移植出现乱码，声明编码方式
+#pragma execution_character_set("utf-8")
 class GameInterface : public QMainWindow
 {
     Q_OBJECT
@@ -30,16 +33,28 @@ public:
     //键盘操作
     void keyPressEvent(QKeyEvent *ev);
     void keyReleaseEvent(QKeyEvent *ev);
+
 public:
     //玩家
     player Pacman;
+    //幽灵
+    Ghost enemy[1];
     //计数器
     QTimer m_Timer;
     //游戏进程
     int Game_step = 0;
     //开局延时变量
     int StartTime = 0;
-
+    int carry = 0;
+    //分数
+    int score = 0;
+    QPushButton* End_button = new QPushButton("返回开始界面");
+    QLineEdit* ScoreText = new QLineEdit();
+    //背景音乐
+    QSound *backmusic;
+public slots:
+    //结束
+    void GameOver();
 };
 
 #endif // GAMEINTERFACE_H

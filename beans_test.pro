@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
+QT += multimedia
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = beans_test
@@ -25,18 +24,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        gameinterface.cpp \
+    ghost.cpp \
+    main.cpp \
+    gameinterface.cpp \
     player.cpp \
-    GameMap.cpp
+    GameMap.cpp \
+    startinterface.cpp
 
 HEADERS += \
-        gameinterface.h \
+    gameinterface.h \
     config.h \
+    ghost.h \
     player.h \
-    GameMap.h
+    GameMap.h \
+    startinterface.h
 
 FORMS +=
+
+CONFIG += console
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -45,3 +50,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     source.qrc
+
+DISTFILES +=
