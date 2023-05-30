@@ -54,7 +54,7 @@ int Ghost::heuristic(Node start, Node goal)
 
 void Ghost::A_Start(int Pac_x, int Pac_y)
 {
-    int player_x = int((Pac_x+15)/30),player_y = int((Pac_y+15)/30);
+    int player_x = int((Pac_x+player_width/2)/30),player_y = int((Pac_y+player_height/2)/30);
     Node *carry = NULL, tmp, start, goal;
     goal = SMap[player_x][player_y];
     start = SMap[rx][rx];
@@ -171,26 +171,33 @@ void Ghost::Update(int Pac_x, int Pac_y)
         x += enemy_speed;
         flag = 4;
     }
-    if(y == NextNode.y * 30 && x == NextNode.x * 30)
-    {
-        flag = 0;
-    }
-    if(judge())
-    {
-        cout<<"Jam!"<<endl;
-        x = rx * 30;
-        y = ry * 30;
-    }
+//    if(y == NextNode.y * 30 && x == NextNode.x * 30)
+//    {
+//        flag = 0;
+//    }
+//    if(judge()&&globalGameMap.mapData[rx][rx] != 1)
+//    {
+//        cout<<rx<<" "<<ry<<"Jam!"<<endl;
+//        x = rx * 30;
+//        y = ry * 30;
+//    }
 }
 
-bool Ghost::judge()
-{
-    int tempX[4] = {ghost_width-2, 0, 2, 0};
-    int tempY[4] = {0, ghost_height-2, 0, 2};
-    for (int k = 0; k < 4; k++) {
-        if (globalGameMap.mapData[int((x + tempX[k]) / 30)][int((y + tempY[k]) / 30)] == 1) {
-            return true;
-        }
-    }
-    return false;
-}
+//bool Ghost::judge()
+//{
+//    int tempX[4] = {0, 0, 0, ghost_width};
+//    int tempY[4] = {0, ghost_height, 0, 0};
+//    for (int k = 0; k < 4; k++) {
+//        if (globalGameMap.mapData[int((x + tempX[k]) / 30)][int((y + tempY[k]) / 30)] == 1) {
+//            switch(k)
+//            {
+//            case 0: y += enemy_speed; break;
+//            case 1: y -= enemy_speed; break;
+//            case 2: x += enemy_speed; break;
+//            case 3: x -= enemy_speed; break;
+//            }
+//            return true;
+//        }
+//    }
+//    return false;
+//}

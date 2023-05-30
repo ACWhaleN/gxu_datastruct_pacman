@@ -202,7 +202,7 @@ void GameInterface::paintEvent(QPaintEvent *event)
         painter.setFont(font1);
         painter.setPen(Qt::white);
         //显示倒计时
-        if(StartTime <= 1000/Game_rate)
+        if(StartTime <= 500/Game_rate)
             painter.drawText(Game_width/2-100,Game_height/2-50,"Ready!");
         else
         {
@@ -212,7 +212,7 @@ void GameInterface::paintEvent(QPaintEvent *event)
         }
         StartTime++;
     }
-    else if(Game_step == 1)
+    if(Game_step != 2)
     {
         QBrush yellow_brush( QColor("yellow") );       //把刷子设置为黄色
         painter.setBrush(yellow_brush);                //应用刷子
@@ -237,7 +237,7 @@ void GameInterface::paintEvent(QPaintEvent *event)
         else
         {
             painter.drawPie(Pacman.player_rect,0,360*16);
-            if(Pacman.step>250/Game_rate)
+            if(Pacman.step>100/Game_rate)
             {
                 Pacman.flag = 0;
                 Pacman.step = 0;
@@ -249,7 +249,7 @@ void GameInterface::paintEvent(QPaintEvent *event)
         if(Pacman.life<=0)
             Game_step++;
     }
-    else if(Game_step == 2)
+    else
     {
         QFont font2("微软雅黑",45,QFont::Bold);
         painter.setFont(font2);

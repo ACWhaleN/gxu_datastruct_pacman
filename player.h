@@ -2,7 +2,6 @@
 #define PLAYER_H
 
 #include <QPixmap>
-
 class player
 {
 public:

@@ -25,19 +25,23 @@ player::player()
  */
 void player::Update()
 {
-    int NewY=y+speed*UD;  //上下
-    int NewX=x+speed*LR;  //左右
-    if (!globalGameMap.isCollision(NewX, NewY)) {
-        // 如果没有碰撞，更新位置
-        x = NewX;
-        y = NewY;
-    }
-    int tempX[4]={2,0,-2,0};
-    int tempY[4]={0,2,0,-2};
-    //吃掉豆子的判定
-    for(int k=0;k<4;k++)
+    y += speed*UD;  //上下
+    x += speed*LR;  //左右
+    int tempX[4] = {0, 0, 0, player_width};
+    int tempY[4] = {0, player_height, 0, 0};
+    for (int k = 0; k < 4; k++)
     {
-        if (globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]==2)
+        if (globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30] == 1) //检测玩家墙壁碰撞方向
+        {
+            switch(k)
+            {
+            case 0: y += speed/2; break;
+            case 1: y -= speed/2; break;
+            case 2: x += speed/2; break;
+            case 3: x -= speed/2; break;
+            }
+        }
+        else if(globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]==2) //吃掉豆子的判定
         {
             globalGameMap.mapData[(x+tempX[k])/30][(y+tempY[k])/30]=0;
             globalGameMap.BeanScore += 10;
