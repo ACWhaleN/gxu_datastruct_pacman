@@ -3,19 +3,26 @@
 
 #include<QPainter>
 #include<QApplication>
-
+/**
+ * @brief StartInterface类的构造函数
+ * @param parent 父窗口指针
+ */
 StartInterface::StartInterface(QWidget *parent) :
     QMainWindow(parent)
 {
     //初始化场景
     initScene();
 }
-
+/**
+ * @brief 析构函数
+ */
 StartInterface::~StartInterface()
 {
     delete this;
 }
-
+/**
+ * @brief 界面初始化设置
+ */
 void StartInterface::initScene()
 {
     //设置窗口的固定大小
@@ -65,12 +72,9 @@ void StartInterface::initScene()
     void paintEvent(QPaintEvent *);
 }
 
-void StartInterface::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-
-}
-
+/**
+ * @brief 界面切换槽函数
+ */
 void StartInterface::change()
 {
     GameWindow.show();

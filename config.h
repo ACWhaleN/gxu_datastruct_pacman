@@ -42,10 +42,10 @@
 #define beans_width 2
 #define beans_height 2
 //幽灵出生区域
-#define EnStart_x 29
+#define EnStart_x 31
 #define EnStart_y 14
-#define EnStart_w 6
-#define EnStart_h 4
+#define EnStart_w 3
+#define EnStart_h 3
 //玩家出生区域
 #define PacStart_x 31
 #define PacStart_y 23

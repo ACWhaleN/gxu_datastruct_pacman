@@ -80,11 +80,7 @@ void GameInterface::initScene()
         "}");
     //敌人初始化
     for(int i=0;i<ghost_count;i++)
-    {
-        enemy[i].Set();
         enemy[i].Start_Delay = 120/ Game_rate * i; //设置启动时延
-
-    }
     //绘制函数(名称固定，不可修改)
     void paintEvent(QPaintEvent *);
     //配置计时器的刷新间隔
@@ -314,7 +310,9 @@ void GameInterface::paintEvent(QPaintEvent *)
     }
 }
 
-
+/**
+ * @brief 游戏结束
+ */
 void GameInterface::GameOver()
 {
     StartInterface *StartScene = new StartInterface;

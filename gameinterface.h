@@ -12,7 +12,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QSound>
-using namespace std;
+
 //避免移植出现乱码，声明编码方式
 #pragma execution_character_set("utf-8")
 class GameInterface : public QMainWindow

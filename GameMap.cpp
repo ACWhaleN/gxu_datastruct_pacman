@@ -59,13 +59,13 @@ GameMap::GameMap(int width, int height) : width(width), height(height), mapData(
             }
         }
     }
-    for(int i = EnStart_x; i<= EnStart_x + EnStart_w; i++)
-        for(int j=EnStart_y; j<= EnStart_y + EnStart_h; j++)
+    for(int i = EnStart_x; i< EnStart_x + EnStart_w; i++)
+        for(int j=EnStart_y; j< EnStart_y + EnStart_h; j++)
         {
             mapData[i][j] = 0;
         }
-    for(int i = PacStart_x; i<= PacStart_x + PacStart_w; i++)
-        for(int j=PacStart_y; j<= PacStart_y + PacStart_h; j++)
+    for(int i = PacStart_x; i< PacStart_x + PacStart_w; i++)
+        for(int j=PacStart_y; j< PacStart_y + PacStart_h; j++)
         {
             mapData[i][j] = 0;
         }
@@ -172,7 +172,7 @@ bool GameMap::isCollision(int x, int y) {
 }
 
 /**
-* @brief 重置AMap，为新一轮寻路做准备
+* @brief 重置AMap
 */
 void GameMap::reAMap()
 {

@@ -4,11 +4,10 @@
 #include<list>
 extern GameMap globalGameMap;
 using namespace std;
+/**
+ * @brief Ghost类的构造函数
+ */
 Ghost::Ghost()
-{
-}
-
-void Ghost::Set()
 {
     ApCe[0][0].load(attackable1_path);
     ApCe[1][0].load(attackable2_path);
@@ -40,12 +39,20 @@ void Ghost::Set()
     Mrect.setHeight(ghost_height);
     Mrect.moveTo(x,y);
 }
-
+/**
+ * @brief 计算曼哈顿距离
+ * @param start 起始位置
+ * @param goal 目标位置
+ */
 int Ghost::heuristic(Node start, Node goal)
 {
     return abs(start.y - goal.y)+abs(start.x - goal.x);
 }
-
+/**
+ * @brief A*寻路算法
+ * @param Pac_x 玩家的x坐标
+ * @param Pac_y 玩家的y坐标
+ */
 void Ghost::A_Start(int Pac_x, int Pac_y)
 {
     int player_x = int((Pac_x+player_width/2)/30),player_y = int((Pac_y+player_height/2)/30);
@@ -130,7 +137,11 @@ void Ghost::A_Start(int Pac_x, int Pac_y)
             SMap[i][j].cost = 999;
         }
 }
-
+/**
+ * @brief Ghost的更新函数
+ * @param Pac_x 玩家的x坐标
+ * @param Pac_y 玩家的y坐标
+ */
 void Ghost::Update(int Pac_x, int Pac_y)
 {
     carry = carry==1?0:1;
