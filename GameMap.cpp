@@ -25,14 +25,13 @@ bool GameMap::isRoad(int x, int y) {
  * @param width 地图宽度
  * @param height 地图高度
  */
-GameMap::GameMap(int width, int height) : width(width), height(height), mapData(width, QVector<int>(height)), Visited(width, QVector<bool>(height)) {
+GameMap::GameMap(int width, int height) : width(width), height(height), mapData(width, QVector<int>(height)), Visited(width, QVector<bool>(height)), AMap(width, QVector<bool>(height)) {
     int i, j;
     for (i = 0; i < width; i++) {
         for (j = 0; j < height; j++) {
             mapData[i][j] = 1;
         }
     }
-
     generatePerfectMaze(3, 3);
 
     for (i = 0; i < width; i++) {
@@ -72,6 +71,7 @@ GameMap::GameMap(int width, int height) : width(width), height(height), mapData(
         }
     BeanRect.setWidth(beans_width);
     BeanRect.setHeight(beans_height);
+    reAMap();
 }
 
 /**
@@ -169,4 +169,19 @@ bool GameMap::isCollision(int x, int y) {
         }
     }
     return false;
+}
+
+/**
+* @brief 重置AMap，为新一轮寻路做准备
+*/
+void GameMap::reAMap()
+{
+    for(int i=0;i<width;i++)
+        for(int j=0;j<height;j++)
+            if(mapData[i][j] != 1){
+                AMap[i][j] = true;
+            }
+            else{
+                AMap[i][j] = false;
+            }
 }

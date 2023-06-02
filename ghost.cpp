@@ -55,14 +55,17 @@ int Ghost::heuristic(Node start, Node goal)
 void Ghost::A_Start(int Pac_x, int Pac_y)
 {
     int player_x = int((Pac_x+player_width/2)/30),player_y = int((Pac_y+player_height/2)/30);
+    int break_mark = 0; //防过长
     Node *carry = NULL, tmp, start, goal;
     goal = SMap[player_x][player_y];
     start = SMap[rx][rx];
     SMap[rx][ry].cost = 0;
     open_set.push_back(&SMap[rx][ry]);
-    cout<<"goal"<<player_x<<" "<<player_y<<endl;;
     do
     {
+        break_mark++;
+        if(break_mark > 50)
+            break;
         int MinCost = 998;
         for(auto &node : open_set)
         {
@@ -97,7 +100,7 @@ void Ghost::A_Start(int Pac_x, int Pac_y)
                     tmp.y = carry->y + move[i][1];
                     if(tmp.x<0||tmp.x>64||tmp.y<0||tmp.y>32)
                         continue;
-                    if(globalGameMap.mapData[tmp.x][tmp.y]!=1 && !SMap[tmp.x][tmp.y].isVisited)
+                    if(globalGameMap.AMap[tmp.x][tmp.y] && !SMap[tmp.x][tmp.y].isVisited)
                     {
                         tmp.cost = heuristic(tmp, goal) + heuristic(tmp, start);
                         if(tmp.cost < SMap[tmp.x][tmp.y].cost)
@@ -112,16 +115,19 @@ void Ghost::A_Start(int Pac_x, int Pac_y)
         }
     }while(!open_set.empty() && (carry->x != player_x || carry->y != player_y));
     open_set.clear();
+    PathNode.clear();
     NextSearch.clear();
     //录入生成的路径
-    while(open_set.empty() && (carry->x != rx || carry->y != ry))
+    int count = 2;
+    while((carry->x != rx || carry->y != ry)|| carry->parent!=NULL)
     {
         PathNode.push_front(*carry);
-        cout<<"path:"<<carry->x<<" "<<carry->y<<endl;
+        if( count-- >0&& count != 1)
+        {
+            globalGameMap.AMap[carry->x][carry->y] = false; //标记最后2个节点不可达，实现围堵的效果
+        }
         carry=carry->parent;
     }
-    cout<<"Done"<<endl;
-    PathNode.push_back(SMap[player_x][player_y]);
     for(int i=0;i<64;i++)
         for(int j=0;j<32;j++)
         {
@@ -137,12 +143,14 @@ void Ghost::Update(int Pac_x, int Pac_y)
     rx = int((x+15)/30);
     ry = int((y+15)/30);
     Mrect.moveTo( x, y);
-    cout<<"enemy:"<<rx<<" "<<ry<<" "<<globalGameMap.mapData[rx][ry]<<endl;
-    cout<<"next:"<<NextNode.x<<" "<<NextNode.y<<" "<<globalGameMap.mapData[rx][ry]<<endl;
-    if(step == 0)
+
+    if(Delay > 0)   //启动时延未结束保持等待状态
+        return;
+    if(step <= 0)
     {
         A_Start(Pac_x, Pac_y);
         step = 100/Game_rate;
+        mark = true;
     }
     else
         step--;
@@ -171,33 +179,5 @@ void Ghost::Update(int Pac_x, int Pac_y)
         x += enemy_speed;
         flag = 4;
     }
-//    if(y == NextNode.y * 30 && x == NextNode.x * 30)
-//    {
-//        flag = 0;
-//    }
-//    if(judge()&&globalGameMap.mapData[rx][rx] != 1)
-//    {
-//        cout<<rx<<" "<<ry<<"Jam!"<<endl;
-//        x = rx * 30;
-//        y = ry * 30;
-//    }
 }
 
-//bool Ghost::judge()
-//{
-//    int tempX[4] = {0, 0, 0, ghost_width};
-//    int tempY[4] = {0, ghost_height, 0, 0};
-//    for (int k = 0; k < 4; k++) {
-//        if (globalGameMap.mapData[int((x + tempX[k]) / 30)][int((y + tempY[k]) / 30)] == 1) {
-//            switch(k)
-//            {
-//            case 0: y += enemy_speed; break;
-//            case 1: y -= enemy_speed; break;
-//            case 2: x += enemy_speed; break;
-//            case 3: x -= enemy_speed; break;
-//            }
-//            return true;
-//        }
-//    }
-//    return false;
-//}

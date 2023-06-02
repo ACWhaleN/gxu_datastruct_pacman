@@ -46,7 +46,7 @@ void GameInterface::initScene()
     setPalette(QPalette(Qt::black));
     setAutoFillBackground(true);
     //设置背景音乐
-    backmusic = new QSound(BackMusic,this);
+//    backmusic = new QSound(BackMusic,this);
     //设置退出按钮
     End_button->setParent(this);
     End_button->setFlat(true);
@@ -69,7 +69,7 @@ void GameInterface::initScene()
 
     //设置分数结算显示
     ScoreText->setParent(this);
-    ScoreText->setGeometry(Game_width/2+200,Game_height/3,350,60);
+    ScoreText->setGeometry(1960,100,280,40);
     ScoreText->setEnabled(false);
     ScoreText->setStyleSheet(
         "QLineEdit{"                          // 正常状态样式
@@ -78,10 +78,13 @@ void GameInterface::initScene()
         "font: bold 45px;"                      // 字体: 加粗 大小
         "border:0px;"                       // 无边框
         "}");
-    ScoreText->hide();
     //敌人初始化
-    for(int i=0;i<1;i++)
-        enemy[i].Set(i);
+    for(int i=0;i<ghost_count;i++)
+    {
+        enemy[i].Set(0);
+        enemy[i].Delay = 120/ Game_rate * i; //设置启动时延
+
+    }
     //绘制函数(名称固定，不可修改)
     void paintEvent(QPaintEvent *);
     //配置计时器的刷新间隔
@@ -165,20 +168,38 @@ void GameInterface::keyReleaseEvent(QKeyEvent *ev)
  */
 void GameInterface::UpdateDetails()
 {
+    //刷新分数
+    ScoreText->setText(QString::number(score));
     if(Game_step == 1)
     {
         Pacman.Update();    //玩家数据更新
-        enemy[0].Update(Pacman.x,Pacman.y);  //敌人数据更新
-        if(enemy[0].Mrect.intersects(Pacman.player_rect))
-            Pacman.life--;
+        for(int i=0; i<ghost_count; i++)
+        {
+            if(enemy[i].Delay > 0)
+                enemy[i].Delay--;
+            enemy[i].Update(Pacman.x,Pacman.y);  //敌人数据更新
+            if(enemy[i].Mrect.intersects(Pacman.player_rect) && !Pacman.invincible)
+            {
+                Pacman.life--;
+                Pacman.invincible = true;
+            }
+        }
+        // 编号相邻的敌人不走相同的路
+        for(int i=1; i<ghost_count-1; i+=2)
+        {
+            if(enemy[i].mark)
+            {
+                enemy[i].mark = false;
+                globalGameMap.reAMap();
+            }
+        }
     }
     if(Game_step == 2)
     {
         score = globalGameMap.BeanScore;
-        ScoreText->setText(QString::number(score));
-        ScoreText->show();
+        ScoreText->setGeometry(Game_width/2+100,Game_height/3,350,60);
         End_button->show();
-        backmusic->stop();
+//        backmusic->stop();
         m_Timer.stop();
 
     }
@@ -188,7 +209,7 @@ void GameInterface::UpdateDetails()
  * @brief 绘制游戏界面
  * @param event 绘制事件对象
  */
-void GameInterface::paintEvent(QPaintEvent *event)
+void GameInterface::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     QBrush yellow_brush( QColor("yellow") );       //把刷子设置为黄色
@@ -202,13 +223,13 @@ void GameInterface::paintEvent(QPaintEvent *event)
         painter.setFont(font1);
         painter.setPen(Qt::white);
         //显示倒计时
-        if(StartTime <= 500/Game_rate)
+        if(StartTime <= 200/Game_rate)
             painter.drawText(Game_width/2-100,Game_height/2-50,"Ready!");
         else
         {
             Game_step++;
             //播放音乐
-            backmusic->play();
+//            backmusic->play();
         }
         StartTime++;
     }
@@ -216,6 +237,20 @@ void GameInterface::paintEvent(QPaintEvent *event)
     {
         QBrush yellow_brush( QColor("yellow") );       //把刷子设置为黄色
         painter.setBrush(yellow_brush);                //应用刷子
+        // 绘制剩余命数
+        if(Pacman.life > 0){
+            painter.drawPie(1960,20,30,30,225*16,270*16);
+        }
+        if(Pacman.life > 1){
+            painter.drawPie(2000,20,30,30,225*16,270*16);
+        }
+        if(Pacman.life > 2){
+            painter.drawPie(2040,20,30,30,225*16,270*16);
+        }
+        QFont font2("微软雅黑",20,QFont::Bold);
+        painter.setFont(font2);
+        painter.setPen(Qt::white);
+        painter.drawText(1960,90,"Score:");
         if(Pacman.flag == 0)
         {
 
@@ -227,7 +262,7 @@ void GameInterface::paintEvent(QPaintEvent *event)
             case 4:painter.drawPie(Pacman.player_rect,45*16,270*16);break;  //朝右
             default:painter.drawPie(Pacman.player_rect,0,360*16);
             }
-            if(Pacman.UD|Pacman.LR && Pacman.step>100/Game_rate) //在行动过程中才会发生切换
+            if(Pacman.UD|Pacman.LR && Pacman.step>=50/Game_rate) //在行动过程中才会发生切换
             {
                 Pacman.flag = 1;
                 Pacman.step = 0;
@@ -236,25 +271,25 @@ void GameInterface::paintEvent(QPaintEvent *event)
         }
         else
         {
-            painter.drawPie(Pacman.player_rect,0,360*16);
-            if(Pacman.step>100/Game_rate)
+            painter.drawPie(Pacman.player_rect,0,361*16);
+            if(Pacman.step>50/Game_rate)
             {
                 Pacman.flag = 0;
                 Pacman.step = 0;
             }
             Pacman.step++;
         }
-        for (int i=0; i<1; i++)
+        for (int i=0; i<ghost_count; i++)
             painter.drawPixmap(enemy[i].x,enemy[i].y,enemy[i].ApCe[enemy[i].carry][enemy[i].flag]);
         if(Pacman.life<=0)
             Game_step++;
     }
     else
     {
-        QFont font2("微软雅黑",45,QFont::Bold);
-        painter.setFont(font2);
+        QFont font3("微软雅黑",30,QFont::Bold);
+        painter.setFont(font3);
         painter.setPen(Qt::white);
-        painter.drawText((Game_width)/2-200,Game_height/3+50,"Your Score:");
+        painter.drawText((Game_width)/2-300,Game_height/3+50,"Your Score:");
     }
 }
 

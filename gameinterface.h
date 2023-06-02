@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "ghost.h"
+#include "config.h"
 #include <iostream>
 #include <QTimer>
 #include <QKeyEvent>
@@ -38,7 +39,7 @@ public:
     //玩家
     player Pacman;
     //幽灵
-    Ghost enemy[1];
+    Ghost enemy[ghost_count];
     //计数器
     QTimer m_Timer;
     //游戏进程

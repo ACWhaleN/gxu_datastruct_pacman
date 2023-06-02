@@ -30,6 +30,7 @@ public:
     QRect BeanRect; /**< 豆子所占区域的矩形 */
     QVector<QVector<int>> mapData; /**< 地图的二维数组 */
     QVector<QVector<bool>> Visited; /**< 用于DFS判断是否已访问 */
+    QVector<QVector<bool>> AMap; /**< 用于AMap寻路标记 （false为不可达） */
     /**
          * @brief 构造函数
          * @param width 地图宽度
@@ -75,6 +76,11 @@ public:
          * @brief 打破墙壁，让完美迷宫变成有环图
          */
     void breakWalls();
+
+    /**
+         * @brief 重置AMap，为新一轮寻路做准备
+         */
+    void reAMap();
 
 private:
     int dx[4] = {-1, 0, 1, 0}; /**< x坐标的步进方向 */

@@ -5,7 +5,7 @@
 #include <QPalette>
 
 /*********游戏配置**********/
-#define Game_width 1920      //画面宽度1920
+#define Game_width 2080      //画面宽度2080
 #define Game_height  1080    //画面高度1080
 #define Start_width 450     //画面宽度
 #define Start_height 450     //画面高度
@@ -19,6 +19,8 @@
 //玩家判定范围大小
 #define player_width 28
 #define player_height 28
+//幽灵个数
+#define ghost_count 4
 //幽灵图片及判定范围大小
 #define ghost_width 30
 #define ghost_height 30
@@ -33,21 +35,21 @@
 //豆子大小
 #define beans_width 2
 #define beans_height 2
-//敌人出生区域
+//幽灵出生区域
 #define EnStart_x 29
 #define EnStart_y 14
 #define EnStart_w 6
 #define EnStart_h 4
 //玩家出生区域
-#define PacStart_x 30
-#define PacStart_y 22
-#define PacStart_w 4
-#define PacStart_h 4
+#define PacStart_x 31
+#define PacStart_y 23
+#define PacStart_w 3
+#define PacStart_h 3
 
 //玩家速度
 #define player_speed 6
 //敌人速度
-#define enemy_speed 3
+#define enemy_speed 5
 //玩家命数
 #define initial_life 3
 #endif // CONFIG_H
