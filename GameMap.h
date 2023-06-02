@@ -27,6 +27,7 @@ public:
     const int width; /**< 地图宽度 */
     const int height; /**< 地图高度 */
     int BeanScore = 0;/**< 吃豆子所获分数 */
+    bool AttackModel = false; /**< 玩家特殊模式 */
     QRect BeanRect; /**< 豆子所占区域的矩形 */
     QVector<QVector<int>> mapData; /**< 地图的二维数组 */
     QVector<QVector<bool>> Visited; /**< 用于DFS判断是否已访问 */

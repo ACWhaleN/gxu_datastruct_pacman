@@ -32,6 +32,12 @@
 #define blue_down2_path ":/material/blue_down2.png"
 #define blue_right1_path ":/material/blue_right1.png"
 #define blue_right2_path ":/material/blue_right2.png"
+#define deadup_path ":/material/deadup.png"
+#define deaddown_path ":/material/deaddown.png"
+#define deadleft_path ":/material/deadleft.png"
+#define deadright_path ":/material/deadright.png"
+#define attackable1_path ":/material/attackable1.png"
+#define attackable2_path ":/material/attackable2.png"
 //豆子大小
 #define beans_width 2
 #define beans_height 2

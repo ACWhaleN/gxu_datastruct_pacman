@@ -10,5 +10,11 @@
         <file>material/blue_up2.png</file>
         <file>material/Pacman.ico</file>
         <file>material/backmusic.wav</file>
+        <file>material/deaddown.png</file>
+        <file>material/deadleft.png</file>
+        <file>material/deadright.png</file>
+        <file>material/deadup.png</file>
+        <file>material/attackable1.png</file>
+        <file>material/attackable2.png</file>
     </qresource>
 </RCC>

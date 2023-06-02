@@ -8,28 +8,22 @@ Ghost::Ghost()
 {
 }
 
-void Ghost::Set(int color)
+void Ghost::Set()
 {
-    switch(color)
-    {
-    case 0:
-        ApCe[0][0].load(blue_up1_path);
-        ApCe[1][0].load(blue_up2_path);
-        ApCe[0][1].load(blue_up1_path);
-        ApCe[1][1].load(blue_up2_path);
-        ApCe[0][2].load(blue_down1_path);
-        ApCe[1][2].load(blue_down2_path);
-        ApCe[0][3].load(blue_left1_path);
-        ApCe[1][3].load(blue_left2_path);
-        ApCe[0][4].load(blue_right1_path);
-        ApCe[1][4].load(blue_right2_path);
-//        ApCe[0][5].load(blue_up1_path);
-//        ApCe[1][5].load(blue_up2_path);
-        break;
-    case 2:
-    default:
-        break;
-    }
+    ApCe[0][0].load(attackable1_path);
+    ApCe[1][0].load(attackable2_path);
+    ApCe[0][1].load(blue_up1_path);
+    ApCe[1][1].load(blue_up2_path);
+    ApCe[0][2].load(blue_down1_path);
+    ApCe[1][2].load(blue_down2_path);
+    ApCe[0][3].load(blue_left1_path);
+    ApCe[1][3].load(blue_left2_path);
+    ApCe[0][4].load(blue_right1_path);
+    ApCe[1][4].load(blue_right2_path);
+    ApDe[1].load(deadup_path);
+    ApDe[2].load(deaddown_path);
+    ApDe[3].load(deadleft_path);
+    ApDe[4].load(deadright_path);
     x = int(EnStart_x + EnStart_w/2)*30;
     y = int(EnStart_y + EnStart_h/2)*30;
     rx = int((x+15)/30);
@@ -144,7 +138,7 @@ void Ghost::Update(int Pac_x, int Pac_y)
     ry = int((y+15)/30);
     Mrect.moveTo( x, y);
 
-    if(Delay > 0)   //启动时延未结束保持等待状态
+    if(Start_Delay > 0)   //启动时延未结束保持等待状态
         return;
     if(step <= 0)
     {
@@ -179,5 +173,7 @@ void Ghost::Update(int Pac_x, int Pac_y)
         x += enemy_speed;
         flag = 4;
     }
+    if(globalGameMap.AttackModel && live)
+        flag = 0;
 }
 

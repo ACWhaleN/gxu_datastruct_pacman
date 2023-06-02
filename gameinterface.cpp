@@ -81,8 +81,8 @@ void GameInterface::initScene()
     //敌人初始化
     for(int i=0;i<ghost_count;i++)
     {
-        enemy[i].Set(0);
-        enemy[i].Delay = 120/ Game_rate * i; //设置启动时延
+        enemy[i].Set();
+        enemy[i].Start_Delay = 120/ Game_rate * i; //设置启动时延
 
     }
     //绘制函数(名称固定，不可修改)
@@ -169,19 +169,37 @@ void GameInterface::keyReleaseEvent(QKeyEvent *ev)
 void GameInterface::UpdateDetails()
 {
     //刷新分数
+    score = globalGameMap.BeanScore + attackscore;
     ScoreText->setText(QString::number(score));
     if(Game_step == 1)
     {
+        if(globalGameMap.AttackModel && AKDelay-- == 0)
+        {
+            globalGameMap.AttackModel = false;
+            AKDelay = 3000/Game_rate;
+            for(int i=0; i<ghost_count; i++)
+            {
+                enemy[i].live = true;
+            }
+        }
         Pacman.Update();    //玩家数据更新
         for(int i=0; i<ghost_count; i++)
         {
-            if(enemy[i].Delay > 0)
-                enemy[i].Delay--;
+            if(enemy[i].Start_Delay > 0)
+                enemy[i].Start_Delay--;
             enemy[i].Update(Pacman.x,Pacman.y);  //敌人数据更新
-            if(enemy[i].Mrect.intersects(Pacman.player_rect) && !Pacman.invincible)
+            if(enemy[i].Mrect.intersects(Pacman.player_rect))
             {
-                Pacman.life--;
-                Pacman.invincible = true;
+                if(globalGameMap.AttackModel)
+                {
+                    attackscore += 200;
+                    enemy[i].live = false;
+                }
+                else if(!Pacman.invincible)
+                {
+                    Pacman.life--;
+                    Pacman.invincible = true;
+                }
             }
         }
         // 编号相邻的敌人不走相同的路
@@ -196,7 +214,6 @@ void GameInterface::UpdateDetails()
     }
     if(Game_step == 2)
     {
-        score = globalGameMap.BeanScore;
         ScoreText->setGeometry(Game_width/2+100,Game_height/3,350,60);
         End_button->show();
 //        backmusic->stop();
@@ -280,7 +297,11 @@ void GameInterface::paintEvent(QPaintEvent *)
             Pacman.step++;
         }
         for (int i=0; i<ghost_count; i++)
-            painter.drawPixmap(enemy[i].x,enemy[i].y,enemy[i].ApCe[enemy[i].carry][enemy[i].flag]);
+            if(globalGameMap.AttackModel && !enemy[i].live)
+                painter.drawPixmap(enemy[i].x,enemy[i].y,enemy[i].ApDe[enemy[i].flag]);
+            else
+                painter.drawPixmap(enemy[i].x,enemy[i].y,enemy[i].ApCe[enemy[i].carry][enemy[i].flag]);
+
         if(Pacman.life<=0)
             Game_step++;
     }

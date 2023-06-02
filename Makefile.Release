@@ -170,12 +170,18 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_source.cpp
 release\qrc_source.cpp: source.qrc \
 		..\..\..\Qt\5.15.2\msvc2019_64\bin\rcc.exe \
+		material\deadleft.png \
 		material\blue_down1.png \
+		material\deadup.png \
+		material\deaddown.png \
+		material\attackable2.png \
 		material\blue_up2.png \
 		material\blue_left2.png \
 		material\blue_right2.png \
+		material\attackable1.png \
 		material\blue_up1.png \
 		material\Pacman.ico \
+		material\deadright.png \
 		material\blue_down2.png \
 		material\blue_left1.png \
 		material\blue_right1.png \
@@ -273,12 +279,20 @@ release\moc_gameinterface.cpp: gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qline.h \
 		ghost.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -292,22 +306,17 @@ release\moc_gameinterface.cpp: gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPainter \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpainter.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextoption.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
@@ -409,12 +418,20 @@ release\moc_startinterface.cpp: startinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qline.h \
 		ghost.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -428,22 +445,17 @@ release\moc_startinterface.cpp: startinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPainter \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpainter.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextoption.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
@@ -561,14 +573,19 @@ release\ghost.obj: ghost.cpp ghost.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qiodevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qline.h \
 		config.h \
-		gameinterface.h \
-		player.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -582,45 +599,17 @@ release\ghost.obj: ghost.cpp ghost.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
+		GameMap.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPainter \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpainter.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextoption.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qpushbutton.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qabstractbutton.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QLineEdit \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qlineedit.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qframe.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextcursor.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextformat.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\QSound \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qsound.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimediaglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimedia-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
-		GameMap.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h
 
-release\main.obj: main.cpp gameinterface.h \
-		player.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPixmap \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpixmap.h \
+release\main.obj: main.cpp ..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QApplication \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qapplication.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtguiglobal.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qglobal.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qconfig-bootstrapped.h \
@@ -644,67 +633,74 @@ release\main.obj: main.cpp gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qnumeric.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qversiontagging.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtgui-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpaintdevice.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qwindowdefs.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qobjectdefs.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qnamespace.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qobjectdefs_impl.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qwindowdefs_win.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qrect.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmargins.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qsize.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qpoint.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcolor.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qrgb.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstringlist.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qlist.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qalgorithms.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qiterator.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qrefcount.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qarraydata.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qhashfunctions.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcoreapplication.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstring.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qchar.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbytearray.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qrefcount.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qnamespace.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qarraydata.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstringliteral.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstringalgorithms.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstringview.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstringbuilder.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qobject.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qobjectdefs.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qobjectdefs_impl.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qlist.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qalgorithms.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qiterator.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qhashfunctions.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qpair.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvector.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcontainertools_impl.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qpoint.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbytearraylist.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstringlist.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qregexp.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qstringmatcher.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qrgba64.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qsharedpointer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qshareddata.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qhash.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qsharedpointer_impl.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qobject.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcoreevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qscopedpointer.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmetatype.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvarlengtharray.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcontainerfwd.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qobject_impl.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qimage.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpixelformat.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtransform.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qeventloop.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qwindowdefs.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qwindowdefs_win.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qsize.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmargins.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qdesktopwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpaintdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qrect.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcolor.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qrgb.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qrgba64.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qmatrix.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpolygon.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qregion.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdatastream.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qiodevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qline.h \
-		ghost.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtransform.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qimage.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpixelformat.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpixmap.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qsharedpointer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qshareddata.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qhash.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qsharedpointer_impl.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -718,22 +714,29 @@ release\main.obj: main.cpp gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qguiapplication.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qinputmethod.h \
+		GameMap.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPainter \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpainter.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextoption.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		startinterface.h \
+		gameinterface.h \
+		player.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPixmap \
+		ghost.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
+		config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
@@ -747,17 +750,7 @@ release\main.obj: main.cpp gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\QSound \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qsound.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimediaglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimedia-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QApplication \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qapplication.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcoreapplication.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qeventloop.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qdesktopwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qguiapplication.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qinputmethod.h \
-		GameMap.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
-		startinterface.h
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimedia-config.h
 
 release\gameinterface.obj: gameinterface.cpp gameinterface.h \
 		player.h \
@@ -841,12 +834,20 @@ release\gameinterface.obj: gameinterface.cpp gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qline.h \
 		ghost.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -860,22 +861,17 @@ release\gameinterface.obj: gameinterface.cpp gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPainter \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpainter.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextoption.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
@@ -890,9 +886,6 @@ release\gameinterface.obj: gameinterface.cpp gameinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qsound.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimediaglobal.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimedia-config.h \
-		config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
 		GameMap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
 		startinterface.h
@@ -977,15 +970,19 @@ release\player.obj: player.cpp player.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qiodevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qline.h \
 		config.h \
-		gameinterface.h \
-		ghost.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -999,40 +996,13 @@ release\player.obj: player.cpp player.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
+		GameMap.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPainter \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpainter.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextoption.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qpushbutton.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qabstractbutton.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QLineEdit \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qlineedit.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qframe.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextcursor.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextformat.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\QSound \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qsound.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimediaglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimedia-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
-		GameMap.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h
 
 release\GameMap.obj: GameMap.cpp GameMap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QVector \
@@ -1123,16 +1093,15 @@ release\GameMap.obj: GameMap.cpp GameMap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
 		config.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPixmap \
-		gameinterface.h \
-		player.h \
-		ghost.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -1146,29 +1115,6 @@ release\GameMap.obj: GameMap.cpp GameMap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qpushbutton.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qabstractbutton.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QLineEdit \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qlineedit.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qframe.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextcursor.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextformat.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\QSound \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qsound.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimediaglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimedia-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette
 
 release\startinterface.obj: startinterface.cpp startinterface.h \
@@ -1254,12 +1200,20 @@ release\startinterface.obj: startinterface.cpp startinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qline.h \
 		ghost.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QRect \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
+		config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qkeysequence.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qevent.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qvariant.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qmap.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qdebug.h \
@@ -1273,22 +1227,17 @@ release\startinterface.obj: startinterface.cpp startinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qfiledevice.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qvector2d.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtouchdevice.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\QTimer \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qtimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qbasictimer.h \
+		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QKeyEvent \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPainter \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpainter.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qtextoption.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpen.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qbrush.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontinfo.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfont.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qfontmetrics.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QMainWindow \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qmainwindow.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgetsglobal.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtwidgets-config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qwidget.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qpalette.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qsizepolicy.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qcursor.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qtabwidget.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\qicon.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QPushButton \
@@ -1303,9 +1252,6 @@ release\startinterface.obj: startinterface.cpp startinterface.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qsound.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimediaglobal.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtMultimedia\qtmultimedia-config.h \
-		config.h \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QWidget \
-		..\..\..\Qt\5.15.2\msvc2019_64\include\QtGui\QPalette \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\QApplication \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtWidgets\qapplication.h \
 		..\..\..\Qt\5.15.2\msvc2019_64\include\QtCore\qcoreapplication.h \

@@ -47,8 +47,12 @@ public:
     //开局延时变量
     int StartTime = 0;
     int carry = 0;
-    //分数
+    //特殊模式延时
+    int AKDelay = 3000/Game_rate;
+    //总分数
     int score = 0;
+    //击杀幽灵分数
+    int attackscore = 0;
     QPushButton* End_button = new QPushButton("返回开始界面");
     QLineEdit* ScoreText = new QLineEdit();
     //背景音乐
