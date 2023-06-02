@@ -1,5 +1,7 @@
 ﻿#include"GameMap.h"
 #include"config.h"
+
+
 /**
  * @brief 判断给定坐标是否为通路
  * @param x x坐标
@@ -26,52 +28,7 @@ bool GameMap::isRoad(int x, int y) {
  * @param height 地图高度
  */
 GameMap::GameMap(int width, int height) : width(width), height(height), mapData(width, QVector<int>(height)), Visited(width, QVector<bool>(height)), AMap(width, QVector<bool>(height)) {
-    int i, j;
-    for (i = 0; i < width; i++) {
-        for (j = 0; j < height; j++) {
-            mapData[i][j] = 1;
-        }
-    }
-    generatePerfectMaze(3, 3);
-
-    for (i = 0; i < width; i++) {
-        j = 0;
-        mapData[i][j] = 1;
-        j = height - 1;
-        mapData[i][j] = 1;
-    }
-
-    for (i = 0; i < height; i++) {
-        j = 0;
-        mapData[j][i] = 1;
-        j = width - 1;
-        mapData[j][i] = 1;
-    }
-
-    mapData[32][19] = 0;
-
-    breakWalls();
-
-    for (i = 0; i < width; i++) {
-        for (j = 0; j < height; j++) {
-            if (mapData[i][j] == 0) {
-                mapData[i][j] = 2;
-            }
-        }
-    }
-    for(int i = EnStart_x; i<= EnStart_x + EnStart_w; i++)
-        for(int j=EnStart_y; j<= EnStart_y + EnStart_h; j++)
-        {
-            mapData[i][j] = 0;
-        }
-    for(int i = PacStart_x; i<= PacStart_x + PacStart_w; i++)
-        for(int j=PacStart_y; j<= PacStart_y + PacStart_h; j++)
-        {
-            mapData[i][j] = 0;
-        }
-    BeanRect.setWidth(beans_width);
-    BeanRect.setHeight(beans_height);
-    reAMap();
+    UpdateMap();
 }
 
 /**
@@ -128,7 +85,7 @@ void GameMap::drawMap(QPainter &painter) {
     QBrush blue_brush(QColor("blue")); // 把刷子设置为蓝色
     blue_brush.setStyle(Qt::SolidPattern);
     QBrush green_brush(QColor("green"));
-
+    QBrush red_brush(QColor("red"));
     for (int j = 0; j < height; ++j) {
         for (int i = 0; i < width; ++i) {
             int mapElement = mapData[i][j];
@@ -148,6 +105,13 @@ void GameMap::drawMap(QPainter &painter) {
                     BeanRect.moveTo(30 * i + 15, 30 * j + 15);
                     painter.drawPie(BeanRect, 0, 360 * 16);
                     // 绘制豆子
+                    break;
+                case 3: // 大力丸
+                    painter.setPen(QPen(Qt::red, powerPelletsHeight));
+                    painter.setBrush(red_brush);
+                    powerPelletsRect.moveTo(30 * i + 15, 30 * j + 15);
+                    painter.drawPie(powerPelletsRect, 0, 360 * 20);
+                    // 绘制大力丸
                     break;
             }
         }
@@ -185,3 +149,79 @@ void GameMap::reAMap()
                 AMap[i][j] = false;
             }
 }
+
+
+/**
+* @brief 刷新生成新地图
+*/
+void GameMap::UpdateMap(){
+    int i,j;
+    for (i = 0; i < width; i++) {
+        for (j = 0; j < height; j++) {
+            mapData[i][j] = 1;
+        }
+    }
+    for (i = 0; i < width; i++) {
+        for (j = 0; j < height; j++) {
+            Visited[i][j]=0;
+        }
+    }
+    generatePerfectMaze(3, 3);
+
+    for (i = 0; i < width; i++) {
+        j = 0;
+        mapData[i][j] = 1;
+        j = height - 1;
+        mapData[i][j] = 1;
+    }
+
+    for (i = 0; i < height; i++) {
+        j = 0;
+        mapData[j][i] = 1;
+        j = width - 1;
+        mapData[j][i] = 1;
+    }
+
+    mapData[32][19] = 0;
+
+    breakWalls();
+
+    for (i = 0; i < width; i++) {
+        for (j = 0; j < height; j++) {
+            if (mapData[i][j] == 0) {
+                mapData[i][j] = 2;
+            }
+        }
+    }
+    PowerPellets();
+    for(int i = EnStart_x; i<= EnStart_x + EnStart_w; i++)
+        for(int j=EnStart_y; j<= EnStart_y + EnStart_h; j++)
+        {
+            mapData[i][j] = 0;
+        }
+    for(int i = PacStart_x; i<= PacStart_x + PacStart_w; i++)
+        for(int j=PacStart_y; j<= PacStart_y + PacStart_h; j++)
+        {
+            mapData[i][j] = 0;
+        }
+    BeanRect.setWidth(beans_width);
+    BeanRect.setHeight(beans_height);
+    powerPelletsRect.setHeight(powerPelletsHeight);
+    powerPelletsRect.setHeight(powerPelletsHeight);
+    reAMap();
+}
+
+
+void GameMap::PowerPellets(){
+    int i,j,flag;
+    for (i = 0; i < width; i++) {
+        for (j = 0; j < height; j++) {
+
+            flag = rand() % 100;
+            if (flag % 37 == 0 && mapData[i][j] == 2) {
+                mapData[i][j] = 3;
+            }
+        }
+    }
+}
+

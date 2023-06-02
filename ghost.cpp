@@ -140,7 +140,7 @@ void Ghost::Update(int Pac_x, int Pac_y)
 
     if(Start_Delay > 0)   //启动时延未结束保持等待状态
         return;
-    if(step <= 0)
+    if(globalGameMap.AttackModel==false){if(step <= 0)
     {
         A_Start(Pac_x, Pac_y);
         step = 100/Game_rate;
@@ -175,5 +175,29 @@ void Ghost::Update(int Pac_x, int Pac_y)
     }
     if(globalGameMap.AttackModel && live)
         flag = 0;
+    }
+    if(globalGameMap.AttackModel==true){
+       int direction=rand()%4;
+       switch (direction) {
+            case 0:
+           y -= enemy_speed;
+           flag = 1;
+           break;
+       case 1:
+      y += enemy_speed;
+      flag = 2;
+      break;
+       case 3:
+      x -= enemy_speed;
+      flag = 3;
+      break;
+       case 4:
+      x += enemy_speed;
+      flag = 4;
+      break;
+       }
+
+       }
+
 }
 

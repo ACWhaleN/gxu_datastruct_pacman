@@ -29,6 +29,7 @@ public:
     int BeanScore = 0;/**< 吃豆子所获分数 */
     bool AttackModel = false; /**< 玩家特殊模式 */
     QRect BeanRect; /**< 豆子所占区域的矩形 */
+    QRect powerPelletsRect; /**< 大力丸所占区域的矩形 */
     QVector<QVector<int>> mapData; /**< 地图的二维数组 */
     QVector<QVector<bool>> Visited; /**< 用于DFS判断是否已访问 */
     QVector<QVector<bool>> AMap; /**< 用于AMap寻路标记 （false为不可达） */
@@ -79,9 +80,20 @@ public:
     void breakWalls();
 
     /**
-         * @brief 重置AMap，为新一轮寻路做准备
-         */
+    * @brief 重置AMap，为新一轮寻路做准备
+    */
     void reAMap();
+
+    /**
+    * @brief 刷新生成新地图
+    */
+    void UpdateMap();
+
+    /**
+    * @brief 大力丸！小小的pacman震撼！
+    */
+    void PowerPellets();
+
 
 private:
     int dx[4] = {-1, 0, 1, 0}; /**< x坐标的步进方向 */

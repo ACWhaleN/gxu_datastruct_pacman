@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <QPixmap>
+#include "config.h"
 class player
 {
 public:
@@ -17,6 +18,10 @@ public:
     int inviDelay; //无敌时延
     bool invincible; //无敌状态
     QRect player_rect;  //碰撞体积
+    int tempX[4] = {0, 0, 0, player_width};
+    int tempY[4] = {0, player_height, 0, 0};
+    int judgeX[4] = {0, 0, 4, player_width-4};
+    int judgeY[4] = {4, player_height-4, 0, 0};
 };
 
 #endif // PLAYER_H

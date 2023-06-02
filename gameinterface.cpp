@@ -96,6 +96,7 @@ void GameInterface::initScene()
  */
 void GameInterface::StartToPlay()
 {
+    globalGameMap.UpdateMap();
     //定时器启动
     m_Timer.start();
     //监听对象坐标并绘制
