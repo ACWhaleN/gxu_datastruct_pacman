@@ -1,7 +1,5 @@
 ﻿#include"GameMap.h"
 #include"config.h"
-
-
 /**
  * @brief 判断给定坐标是否为通路
  * @param x x坐标
@@ -28,7 +26,52 @@ bool GameMap::isRoad(int x, int y) {
  * @param height 地图高度
  */
 GameMap::GameMap(int width, int height) : width(width), height(height), mapData(width, QVector<int>(height)), Visited(width, QVector<bool>(height)), AMap(width, QVector<bool>(height)) {
-    UpdateMap();
+    int i, j;
+    for (i = 0; i < width; i++) {
+        for (j = 0; j < height; j++) {
+            mapData[i][j] = 1;
+        }
+    }
+    generatePerfectMaze(3, 3);
+
+    for (i = 0; i < width; i++) {
+        j = 0;
+        mapData[i][j] = 1;
+        j = height - 1;
+        mapData[i][j] = 1;
+    }
+
+    for (i = 0; i < height; i++) {
+        j = 0;
+        mapData[j][i] = 1;
+        j = width - 1;
+        mapData[j][i] = 1;
+    }
+
+    mapData[32][19] = 0;
+
+    breakWalls();
+
+    for (i = 0; i < width; i++) {
+        for (j = 0; j < height; j++) {
+            if (mapData[i][j] == 0) {
+                mapData[i][j] = 2;
+            }
+        }
+    }
+    for(int i = EnStart_x; i< EnStart_x + EnStart_w; i++)
+        for(int j=EnStart_y; j< EnStart_y + EnStart_h; j++)
+        {
+            mapData[i][j] = 0;
+        }
+    for(int i = PacStart_x; i< PacStart_x + PacStart_w; i++)
+        for(int j=PacStart_y; j< PacStart_y + PacStart_h; j++)
+        {
+            mapData[i][j] = 0;
+        }
+    BeanRect.setWidth(beans_width);
+    BeanRect.setHeight(beans_height);
+    reAMap();
 }
 
 /**
@@ -109,7 +152,7 @@ void GameMap::drawMap(QPainter &painter) {
                 case 3: // 大力丸
                     painter.setPen(QPen(Qt::red, powerPelletsHeight));
                     painter.setBrush(red_brush);
-                    powerPelletsRect.moveTo(30 * i + 15, 30 * j + 15);
+                    powerPelletsRect.moveTo(30 * i + 10, 30 * j + 10);
                     painter.drawPie(powerPelletsRect, 0, 360 * 20);
                     // 绘制大力丸
                     break;
@@ -118,25 +161,10 @@ void GameMap::drawMap(QPainter &painter) {
     }
 }
 
-/**
- * @brief 判断给定坐标是否碰撞墙壁
- * @param x x坐标
- * @param y y坐标
- * @return 是否碰撞墙壁
- */
-bool GameMap::isCollision(int x, int y) {
-    int tempX[4] = {player_width, 0, 0, 0};
-    int tempY[4] = {0, player_height, 0, 0};
-    for (int k = 0; k < 4; k++) {
-        if (mapData[(x + tempX[k]) / 30][(y + tempY[k]) / 30] == 1) {
-            return true;
-        }
-    }
-    return false;
-}
+
 
 /**
-* @brief 重置AMap，为新一轮寻路做准备
+* @brief 重置AMap
 */
 void GameMap::reAMap()
 {
@@ -149,7 +177,6 @@ void GameMap::reAMap()
                 AMap[i][j] = false;
             }
 }
-
 
 /**
 * @brief 刷新生成新地图
@@ -206,7 +233,7 @@ void GameMap::UpdateMap(){
         }
     BeanRect.setWidth(beans_width);
     BeanRect.setHeight(beans_height);
-    powerPelletsRect.setHeight(powerPelletsHeight);
+    powerPelletsRect.setWidth(powerPelletsHeight);
     powerPelletsRect.setHeight(powerPelletsHeight);
     reAMap();
 }
@@ -224,4 +251,3 @@ void GameMap::PowerPellets(){
         }
     }
 }
-

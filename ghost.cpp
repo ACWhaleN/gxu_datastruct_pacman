@@ -4,11 +4,10 @@
 #include<list>
 extern GameMap globalGameMap;
 using namespace std;
+/**
+ * @brief Ghost类的构造函数
+ */
 Ghost::Ghost()
-{
-}
-
-void Ghost::Set()
 {
     ApCe[0][0].load(attackable1_path);
     ApCe[1][0].load(attackable2_path);
@@ -40,19 +39,27 @@ void Ghost::Set()
     Mrect.setHeight(ghost_height);
     Mrect.moveTo(x,y);
 }
-
+/**
+ * @brief 计算曼哈顿距离
+ * @param start 起始位置
+ * @param goal 目标位置
+ */
 int Ghost::heuristic(Node start, Node goal)
 {
     return abs(start.y - goal.y)+abs(start.x - goal.x);
 }
-
-void Ghost::A_Start(int Pac_x, int Pac_y)
+/**
+ * @brief A*寻路算法
+ * @param Goal_x 目标的x坐标
+ * @param Goal_y 目标的y坐标
+ */
+void Ghost::A_Start(int Goal_x, int Goal_y)
 {
-    int player_x = int((Pac_x+player_width/2)/30),player_y = int((Pac_y+player_height/2)/30);
+    int Goal_rx = int(Goal_x/30),Goal_ry = int(Goal_y/30);
     int break_mark = 0; //防过长
     Node *carry = NULL, tmp, start, goal;
-    goal = SMap[player_x][player_y];
-    start = SMap[rx][rx];
+    goal = SMap[Goal_rx][Goal_ry];
+    start = SMap[rx][ry];
     SMap[rx][ry].cost = 0;
     open_set.push_back(&SMap[rx][ry]);
     do
@@ -82,7 +89,7 @@ void Ghost::A_Start(int Pac_x, int Pac_y)
             NextSearch.pop_front();
             open_set.remove(carry);
             SMap[carry->x][carry->y].isVisited = true;
-            if(carry->x == player_x && carry->y == player_y)
+            if(carry->x == Goal_rx && carry->y == Goal_ry)
             {
                 break;
             }
@@ -107,7 +114,12 @@ void Ghost::A_Start(int Pac_x, int Pac_y)
                 }
             }
         }
-    }while(!open_set.empty() && (carry->x != player_x || carry->y != player_y));
+    }while(!open_set.empty() && (carry->x != Goal_rx || carry->y != Goal_ry));
+    if(break_mark>50)
+    {
+        A_Start(int(EnStart_x + EnStart_w/2)*30,int(EnStart_y + EnStart_h/2)*30);
+        return;
+    }
     open_set.clear();
     PathNode.clear();
     NextSearch.clear();
@@ -118,7 +130,7 @@ void Ghost::A_Start(int Pac_x, int Pac_y)
         PathNode.push_front(*carry);
         if( count-- >0&& count != 1)
         {
-            globalGameMap.AMap[carry->x][carry->y] = false; //标记最后2个节点不可达，实现围堵的效果
+            globalGameMap.AMap[carry->x][carry->y] = false; //标记倒数第2个节点不可达，实现围堵的效果
         }
         carry=carry->parent;
     }
@@ -130,28 +142,57 @@ void Ghost::A_Start(int Pac_x, int Pac_y)
             SMap[i][j].cost = 999;
         }
 }
-
-void Ghost::Update(int Pac_x, int Pac_y)
+/**
+ * @brief Ghost的更新函数
+ * @param Goal_x 玩家的x坐标
+ * @param Goal_y 玩家的y坐标
+ */
+void Ghost::Update(int Goal_x, int Goal_y)
 {
+    if(Start_Delay > 0)   //启动时延未结束保持等待状态
+        return;
     carry = carry==1?0:1;
     rx = int((x+15)/30);
     ry = int((y+15)/30);
     Mrect.moveTo( x, y);
-
-    if(Start_Delay > 0)   //启动时延未结束保持等待状态
-        return;
-    if(globalGameMap.AttackModel==false){if(step <= 0)
+    int carryX = Goal_x + player_width/2, carryY = Goal_y + player_height/2;
+    if(globalGameMap.AttackModel && !live)
     {
-        A_Start(Pac_x, Pac_y);
+        carryX = int(EnStart_x + EnStart_w/2)*30;
+        carryY = int(EnStart_y + EnStart_h/2)*30;
+
+    }
+    if(step <= 0)
+    {
+        if(globalGameMap.AttackModel && live)
+        {
+            PathNode.clear();
+        }
+        else
+        {
+            A_Start(carryX,carryY);
+        }
         step = 100/Game_rate;
         mark = true;
     }
     else
         step--;
-    if(x == NextNode.x*30 && y == NextNode.y*30 && !PathNode.empty())
+    if(x == NextNode.x*30 && y == NextNode.y*30)
     {
-        NextNode = PathNode.front();
-        PathNode.pop_front();
+        if(globalGameMap.AttackModel && live)
+        {
+
+            int direction=rand()%4;
+            while(globalGameMap.mapData[rx + judgeX[direction]][ry + judgeY[direction]] == 1)
+                direction=rand()%4;
+            NextNode.x = rx + judgeX[direction];
+            NextNode.y = ry + judgeY[direction];
+        }
+        else if(!PathNode.empty())
+        {
+            NextNode = PathNode.front();
+            PathNode.pop_front();
+        }
     }
     if(y > NextNode.y * 30)
     {
@@ -175,29 +216,5 @@ void Ghost::Update(int Pac_x, int Pac_y)
     }
     if(globalGameMap.AttackModel && live)
         flag = 0;
-    }
-    if(globalGameMap.AttackModel==true){
-       int direction=rand()%4;
-       switch (direction) {
-            case 0:
-           y -= enemy_speed;
-           flag = 1;
-           break;
-       case 1:
-      y += enemy_speed;
-      flag = 2;
-      break;
-       case 3:
-      x -= enemy_speed;
-      flag = 3;
-      break;
-       case 4:
-      x += enemy_speed;
-      flag = 4;
-      break;
-       }
-
-       }
-
 }
 

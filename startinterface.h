@@ -16,8 +16,6 @@ public:
     ~StartInterface();
     //初始化场景
     void initScene();
-    //绘制函数
-    void paintEvent(QPaintEvent *);
     //用于界面切换的游戏界面类
     GameInterface GameWindow;
     QPushButton* Start_button = new QPushButton("开始游戏");

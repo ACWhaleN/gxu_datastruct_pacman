@@ -80,11 +80,7 @@ void GameInterface::initScene()
         "}");
     //敌人初始化
     for(int i=0;i<ghost_count;i++)
-    {
-        enemy[i].Set();
         enemy[i].Start_Delay = 120/ Game_rate * i; //设置启动时延
-
-    }
     //绘制函数(名称固定，不可修改)
     void paintEvent(QPaintEvent *);
     //配置计时器的刷新间隔
@@ -235,22 +231,6 @@ void GameInterface::paintEvent(QPaintEvent *)
     //绘制
     globalGameMap.drawMap(painter);
     //开局倒计时的绘制
-    if(Game_step == 0)
-    {
-        QFont font1("隶书",40,QFont::Bold);
-        painter.setFont(font1);
-        painter.setPen(Qt::white);
-        //显示倒计时
-        if(StartTime <= 200/Game_rate)
-            painter.drawText(Game_width/2-100,Game_height/2-50,"Ready!");
-        else
-        {
-            Game_step++;
-            //播放音乐
-//            backmusic->play();
-        }
-        StartTime++;
-    }
     if(Game_step != 2)
     {
         QBrush yellow_brush( QColor("yellow") );       //把刷子设置为黄色
@@ -289,7 +269,7 @@ void GameInterface::paintEvent(QPaintEvent *)
         }
         else
         {
-            painter.drawPie(Pacman.player_rect,0,361*16);
+            painter.drawPie(Pacman.player_rect,0,360*16);
             if(Pacman.step>50/Game_rate)
             {
                 Pacman.flag = 0;
@@ -302,7 +282,6 @@ void GameInterface::paintEvent(QPaintEvent *)
                 painter.drawPixmap(enemy[i].x,enemy[i].y,enemy[i].ApDe[enemy[i].flag]);
             else
                 painter.drawPixmap(enemy[i].x,enemy[i].y,enemy[i].ApCe[enemy[i].carry][enemy[i].flag]);
-
         if(Pacman.life<=0)
             Game_step++;
     }
@@ -313,9 +292,27 @@ void GameInterface::paintEvent(QPaintEvent *)
         painter.setPen(Qt::white);
         painter.drawText((Game_width)/2-300,Game_height/3+50,"Your Score:");
     }
+    if(Game_step == 0)
+    {
+        QFont font1("隶书",40,QFont::Bold);
+        painter.setFont(font1);
+        painter.setPen(Qt::white);
+        //显示倒计时
+        if(StartTime <= 200/Game_rate)
+            painter.drawText(Game_width/2-100,Game_height/2-50,"Ready!");
+        else
+        {
+            Game_step++;
+            //播放音乐
+//            backmusic->play();
+        }
+        StartTime++;
+    }
 }
 
-
+/**
+ * @brief 游戏结束
+ */
 void GameInterface::GameOver()
 {
     StartInterface *StartScene = new StartInterface;

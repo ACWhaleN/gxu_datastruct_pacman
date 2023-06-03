@@ -10,7 +10,7 @@
 #define Start_width 450     //画面宽度
 #define Start_height 450     //画面高度
 #define Game_title  "Pacman"     //游戏标题
-#define Game_rate 20         //刷新速率（单位：ms）一秒50帧
+#define Game_rate 4         //刷新速率（单位：ms）一秒50帧
 #define Player_life 200     //玩家血量设定
 //图标
 #define img_path ":/material/Pacman.ico"
@@ -42,12 +42,12 @@
 #define beans_width 2
 #define beans_height 2
 //大力丸大小
-#define powerPelletsHeight 15
+#define powerPelletsHeight 10
 //幽灵出生区域
-#define EnStart_x 29
+#define EnStart_x 31
 #define EnStart_y 14
-#define EnStart_w 6
-#define EnStart_h 4
+#define EnStart_w 3
+#define EnStart_h 3
 //玩家出生区域
 #define PacStart_x 31
 #define PacStart_y 23

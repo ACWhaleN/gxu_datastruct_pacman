@@ -12,7 +12,7 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QSound>
-using namespace std;
+
 //避免移植出现乱码，声明编码方式
 #pragma execution_character_set("utf-8")
 class GameInterface : public QMainWindow
@@ -22,7 +22,6 @@ class GameInterface : public QMainWindow
 public:
     explicit GameInterface(QWidget *parent = nullptr);
     ~GameInterface();
-    //函数
     //开始
     void StartToPlay();
     //初始化场景

@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 #include <algorithm>
 
-using namespace std;
+    using namespace std;
 /**
  * @brief 用于random_shuffle函数生成随机数
  */
