@@ -183,6 +183,7 @@ void GameMap::reAMap()
 */
 void GameMap::UpdateMap(){
     int i,j;
+    BeanScore = 0;
     for (i = 0; i < width; i++) {
         for (j = 0; j < height; j++) {
             mapData[i][j] = 1;
